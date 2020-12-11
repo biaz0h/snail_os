@@ -7,7 +7,7 @@
 ; jumping to 0000:7c00h
 org 0x7c00
 bits 16
-start : jmp boot
+_start : jmp boot
 
 ; Constant and vairble definitions
 msg db "Welcome to Snail OS!", 0ah, 0h
@@ -18,7 +18,6 @@ boot:
 	hlt ;  halt the system
 
 ; We have to be 512 bytes. Clear the rest of the bytes with 0
-
 times 510 - ($-$$) db 0
 
 ; BIOS checks all available storage devices if any
