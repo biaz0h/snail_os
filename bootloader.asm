@@ -7,7 +7,7 @@
 ; jumping to 0000:7c00h
 org 0x7c00
 bits 16
-_start : jmp boot
+start : jmp boot
 
 ; Constant and vairble definitions
 msg db "Welcome to Snail OS!", 0ah, 0h
@@ -15,6 +15,25 @@ msg db "Welcome to Snail OS!", 0ah, 0h
 boot:
 	cli ;  clear intterrupt. no interrupts
 	cld ;  clears direction flag. all that we need to init
+
+	
+	mov ax, 0x50
+	mov es, ax
+
+	xor bx,bx
+
+
+	mov al, 2
+	mov ch, 0
+	mov cl, 2
+	mov dh, 0
+	mov dl, 0
+
+	mov ah, 0x02
+	int 0x13
+
+	jmp 0x50:0x0
+
 	hlt ;  halt the system
 
 ; We have to be 512 bytes. Clear the rest of the bytes with 0
